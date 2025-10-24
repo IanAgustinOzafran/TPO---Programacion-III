@@ -8,5 +8,7 @@
 - **Ian Ozafran**  
 - **Gonzalo Calveira**
 
+Link al Informe: https://docs.google.com/document/d/1wAWiU-CJ126MczrKIJucjPX4dh3n5hwIn6TcUfWFJck/edit?tab=t.0
+
 ---
 
