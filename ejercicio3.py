@@ -1,3 +1,13 @@
+''' 
+Parte 3: Programacion Dinamica
+Problema: Mochila
+
+Un ladrón tiene una mochila con capacidad de peso W. Hay n objetos, cada uno con un 
+peso wᵢ y un valor vᵢ. El objetivo es seleccionar un subconjunto de objetos que maximice 
+el valor total sin superar la capacidad de la mochila. 
+
+'''
+
 #funciones
 
 def inicializarMatriz(m, c, f):
