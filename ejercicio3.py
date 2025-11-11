@@ -10,15 +10,15 @@ el valor total sin superar la capacidad de la mochila.
 
 #funciones
 
-def inicializarMatriz(m, c, f):
+def inicializarMatriz(m, capacidad , f):
     for i in range (f):
         m.append([])
 
-        for j in range(c):
+        for j in range(capacidad + 1):
              m[i].append(0)
     return m
 
-def mostrarMatriz(m, c, f):
+def mostrarMatriz(m, capacidad, f):
     print ("\n\n")
     for i in range (f):
         print(m[i])
@@ -43,15 +43,22 @@ inicializarMatriz(m,capacidad, len(objetos))
 
 def rellenarMatriz(m, capacidad, objetos):
     for i in range (len(objetos)):
-        for j in range (capacidad):
-            if (len(objetos) == 1 and i[0] > capacidad): # si es solo un objeto y no entra en la mochila, no gano nada
-                m[i][j] = 0
-            elif (len(objetos) == 1 and i[0] < capacidad):  # si es solo un objeto y entra en la mochila gano su valor
-                m[i][j] = objetos[i][1]
-            if objetos[i][0] <= j + 1:  # si es mas de un objeto y entra, elige el valor mas grande
-                m[i][j] = max(objetos[i][1] + (m[i-1][j-objetos[i][0]] if j-objetos[i][0] >= 0 else 0), m[i-1][j])
-            else:  # si es mas de un objeto y la suma de sus valores no entra en la mochila, agarra el de arriba
-                m[i][j] = m[i-1][j] #no entra, copia el de arriba
+        for j in range (capacidad + 1):
+            peso = objetos[i][0]
+            valor = objetos[i][1]
+            
+            if peso <= j:
+                # si entra, elijo entre incluirlo o no incluirlo
+                if i > 0:
+                    m[i][j] = max(valor + m[i - 1][j - peso], m[i - 1][j])
+                else:
+                    m[i][j] = valor
+            else:
+                # si no entra, copio el valor de la fila anterior (si existe)
+                if i > 0:
+                    m[i][j] = m[i - 1][j]
+                else:
+                    m[i][j] = 0
 
     return m
              
@@ -61,5 +68,7 @@ if capacidad < 1:
     print("La capacidad de la mochila tiene que ser al menos mayor que cero")
 else:
     mostrarMatriz(matrizResultante, capacidad, len(objetos))
-    print("Valor máximo que se puede llevar:", matrizResultante[-1][-1])
+    print("\nValor máximo que se puede llevar en la mochila:", matrizResultante[-1][-1])
+
+
 
